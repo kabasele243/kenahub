@@ -38,6 +38,33 @@ app.post('/api/v1/courses', (req, res) => {
 
 })
 
+app.get('/api/v1/courses/:id', (req, res) => {
+
+
+    /* To get number out of a string */
+    const id = req.params.id * 1;
+    const course = courses.find(el => el.id === id);
+
+    // if (id > courses.length) {
+    if (!tour) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        })
+    }
+
+    /* Find us a callback function to loops through the object and find value equals to the req.params */
+
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            course
+        }
+    })
+    console.log(course);
+})
+
 const port = 3500;
 app.listen(port, () => {
     console.log(`App running on port ${port}...`)
