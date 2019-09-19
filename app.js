@@ -1,7 +1,12 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
+
+// 1) MIDDLEWARES
+app.use(morgan('dev'));
+
 app.use(express.json());
 
 
@@ -17,6 +22,8 @@ app.use((req, res, next) => {
 
 const courses = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/courses.json`));
 
+
+// 2) ROUTES HANDLERS
 const getAllCourses = (req, res) => {
     console.log(req.requestTime);
 
@@ -108,6 +115,8 @@ const deleteCourse = (req, res) => {
 // app.patch('/api/v1/courses/:id', updateCourse);
 // app.delete('/api/v1/courses/:id', deleteCourse);
 
+
+// 3) ROUTES
 app
     .route('/api/v1/courses')
     .get(getAllCourses)
@@ -120,6 +129,8 @@ app
     .patch(updateCourse)
     .delete(deleteCourse);
 
+
+// 4) SERVER
 const port = 3500;
 app.listen(port, () => {
     console.log(`App running on port ${port}...`)
