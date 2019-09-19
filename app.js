@@ -46,7 +46,7 @@ app.get('/api/v1/courses/:id', (req, res) => {
     const course = courses.find(el => el.id === id);
 
     // if (id > courses.length) {
-    if (!tour) {
+    if (!course) {
         return res.status(404).json({
             status: 'fail',
             message: 'Invalid ID'
@@ -63,6 +63,36 @@ app.get('/api/v1/courses/:id', (req, res) => {
         }
     })
     console.log(course);
+})
+
+app.patch('/api/v1/courses/:id', (req, res) => {
+    console.log(res.params.id)
+    if (res.params.id * 1 > courses.length) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        })
+    }
+    res.status(200).json({
+        status: 'success',
+        data: {
+            course: '<Update tour here ...'
+        }
+    })
+})
+app.delete('/api/v1/courses/:id', (req, res) => {
+
+
+    if (res.params.id * 1 > courses.length) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        })
+    }
+    res.status(204).json({
+        status: 'success',
+        data: null
+    })
 })
 
 const port = 3500;
