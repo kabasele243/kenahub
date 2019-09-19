@@ -5,11 +5,24 @@ const app = express();
 app.use(express.json());
 
 
+app.use((req, res, next) => {
+    console.log('Hello from the middleware');
+    next();
+});
+
+app.use((req, res, next) => {
+    req.requestTime = new Date().toISOString();
+    next();
+})
+
 const courses = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/courses.json`));
 
 const getAllCourses = (req, res) => {
+    console.log(req.requestTime);
+
     res.status(200).json({
         status: 'success',
+        requestedAt: req.requestTime,
         results: courses.length,
         data: {
             courses
@@ -37,7 +50,7 @@ const getCourse = (req, res) => {
             course
         }
     })
-    console.log(course);
+
 }
 const createCourse = (req, res) => {
 
