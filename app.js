@@ -145,28 +145,37 @@ const deleteStudent = (req, res) => {
 
 
 // 3) ROUTES
-app
-    .route('/api/v1/courses')
+
+
+
+const courseRouter = express.Router();
+const studentRouter = express.Router();
+
+
+courseRouter
+    .route('/')
     .get(getAllCourses)
     .post(createCourse);
 
-
-app
-    .route('/api/v1/courses/:id')
+courseRouter
+    .route('/:id')
     .get(getCourse)
     .patch(updateCourse)
     .delete(deleteCourse);
 
-app
-    .route('/api/v1/students')
+studentRouter
+    .route('/')
     .get(getAllStudents)
     .post(createStudent);
 
-app
-    .route('/api/v1/students/:id')
+studentRouter
+    .route('/:id')
     .get(getStudent)
     .patch(updateStudent)
     .delete(deleteStudent);
+
+app.use('/api/v1/courses', courseRouter);
+app.use('/api/v1/students', studentRouter);
 
 // 4) SERVER
 const port = 3500;
