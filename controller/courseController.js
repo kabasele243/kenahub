@@ -2,6 +2,29 @@ const fs = require('fs');
 
 const courses = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/courses.json`));
 
+
+exports.checkID = (req, res, next, val) => {
+    console.log(`Course id is: ${val}`);
+    if (req.params.id * 1 > courses.length) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Invalid ID'
+        })
+    }
+    next();
+}
+
+
+exports.checkBody = (req, res, next) => {
+    if (!req.body.title || !req.body.professor) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'Missing Title or Professor'
+        })
+    }
+    next();
+}
+
 exports.getAllCourses = (req, res) => {
     console.log(req.requestTime);
 
@@ -16,27 +39,18 @@ exports.getAllCourses = (req, res) => {
 };
 
 exports.getCourse = (req, res) => {
-    /* To get number out of a string */
     const id = req.params.id * 1;
     const course = courses.find(el => el.id === id);
 
-    // if (id > courses.length) {
-    if (!course) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Invalid ID'
-        })
-    }
-
-    /* Find us a callback function to loops through the object and find value equals to the req.params */
     res.status(200).json({
         status: 'success',
         data: {
             course
         }
-    })
+    });
 
-}
+};
+
 exports.createCourse = (req, res) => {
 
     const newId = courses[courses.length - 1].id + 1;
@@ -57,13 +71,6 @@ exports.createCourse = (req, res) => {
 };
 
 exports.updateCourse = (req, res) => {
-    console.log(res.params.id)
-    if (res.params.id * 1 > courses.length) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Invalid ID'
-        })
-    }
     res.status(200).json({
         status: 'success',
         data: {
@@ -73,12 +80,6 @@ exports.updateCourse = (req, res) => {
 };
 
 exports.deleteCourse = (req, res) => {
-    if (res.params.id * 1 > courses.length) {
-        return res.status(404).json({
-            status: 'fail',
-            message: 'Invalid ID'
-        })
-    }
     res.status(204).json({
         status: 'success',
         data: null
