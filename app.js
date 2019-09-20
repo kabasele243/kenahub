@@ -95,8 +95,6 @@ const updateCourse = (req, res) => {
 };
 
 const deleteCourse = (req, res) => {
-
-
     if (res.params.id * 1 > courses.length) {
         return res.status(404).json({
             status: 'fail',
@@ -109,11 +107,41 @@ const deleteCourse = (req, res) => {
     })
 }
 
-// app.get('/api/v1/courses', getAllCourses);
-// app.post('/api/v1/courses', createCourse);
-// app.get('/api/v1/courses/:id', getCourse);
-// app.patch('/api/v1/courses/:id', updateCourse);
-// app.delete('/api/v1/courses/:id', deleteCourse);
+const getAllStudents = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined'
+    })
+}
+
+const getStudent = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined'
+    })
+}
+
+const createStudent = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined'
+    })
+}
+
+const updateStudent = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined'
+    })
+}
+
+const deleteStudent = (req, res) => {
+    res.status(500).json({
+        status: 'error',
+        message: 'This route is not yet defined'
+    })
+
+}
 
 
 // 3) ROUTES
@@ -129,6 +157,16 @@ app
     .patch(updateCourse)
     .delete(deleteCourse);
 
+app
+    .route('/api/v1/students')
+    .get(getAllStudents)
+    .post(createStudent);
+
+app
+    .route('/api/v1/students/:id')
+    .get(getStudent)
+    .patch(updateStudent)
+    .delete(deleteStudent);
 
 // 4) SERVER
 const port = 3500;
