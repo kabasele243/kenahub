@@ -1,49 +1,65 @@
 const Course = require('./../models/courseModel')
 
 
-exports.checkBody = (req, res, next) => {
-    if (!req.body.title || !req.body.professor) {
-        return res.status(400).json({
+exports.getAllCourses = async (req, res) => {
+    try {
+        const courses = await Course.find();
+
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            results: courses.length,
+            data: {
+                courses
+            }
+        });
+    } catch (err) {
+        res.status(404).json({
             status: 'fail',
-            message: 'Missing Title or Professor'
+            message: err
         })
     }
-    next();
-}
-
-exports.getAllCourses = (req, res) => {
-    console.log(req.requestTime);
-
-    res.status(200).json({
-        status: 'success',
-        requestedAt: req.requestTime,
-        // results: courses.length,
-        // data: {
-        //     courses
-        // }
-    })
 };
 
-exports.getCourse = (req, res) => {
-    const id = req.params.id * 1;
-    // const course = courses.find(el => el.id === id);
+exports.getCourse = async (req, res) => {
 
-    // res.status(200).json({
-    //     status: 'success',
-    //     data: {
-    //         course
-    //     }
-    // });
+    try {
+        const course = await Course.findById(req.params.id);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                course
+            }
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: err
+        })
+
+    }
+
 
 };
 
-exports.createCourse = (req, res) => {
-    res.status(201).json({
-        status: 'success',
-        // data: {
-        //     course: newCourse
-        // }
-    })
+exports.createCourse = async (req, res) => {
+    try {
+
+        const newCourse = await Course.create(req.body)
+
+        res.status(201).json({
+            status: 'success',
+            data: {
+                course: newCourse
+            }
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: 'Invalid data sent'
+        })
+
+    }
 };
 
 exports.updateCourse = (req, res) => {
