@@ -62,18 +62,34 @@ exports.createCourse = async (req, res) => {
     }
 };
 
-exports.updateCourse = (req, res) => {
-    res.status(200).json({
-        status: 'success',
-        data: {
-            course: '<Update tour here ...'
-        }
-    })
+exports.updateCourse = async (req, res) => {
+    try {
+        const course = await Course.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        res.status(200).json({
+            status: 'success',
+            data: {
+                course
+            }
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+        })
+    }
 };
 
-exports.deleteCourse = (req, res) => {
-    res.status(204).json({
-        status: 'success',
-        data: null
-    })
+exports.deleteCourse = async (req, res) => {
+    try {
+        await Course.findByIdAndDelete(req.params.id);
+        res.status(204).json({
+            status: 'success',
+            data: null
+        })
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+        })
+    }
 }
