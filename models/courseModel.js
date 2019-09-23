@@ -4,12 +4,25 @@ const courseSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'A course must have a title'],
-        unique: true
+        unique: true,
+        trim: true
     },
-    professor: String,
-    summary: {
+    instructor: String,
+    overview: {
+        description: { type: String, required: [true, 'A course must have a description'], trim: true },
+        students: { type: Number, trim: true }
+
+    },
+    imageCover: {
         type: String,
-        required: [true, 'A course must have a summary']
+        required: [true, 'A course must have a cover image']
+    },
+    QA: [String],
+    Announcements: [String],
+    Content: [String],
+    createdAt: {
+        type: Date,
+        default: Date.now()
     }
 });
 
