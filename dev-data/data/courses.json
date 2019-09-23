@@ -8,6 +8,12 @@
             "video",
             "video.1"
         ],
+        "keyword": [
+            "web",
+            "developement",
+            "node",
+            "back-end"
+        ],
         "createdAt": "",
         "title": "the Complete Node Development Bootcamp",
         "instructor": "Angela Yu",
@@ -29,6 +35,12 @@
         "Content": [
             "video",
             "video.1"
+        ],
+        "keyword": [
+            "application",
+            "developement",
+            "angular",
+            "front-end"
         ],
         "createdAt": "",
         "title": "the Complete Angular Development Bootcamp",
@@ -52,6 +64,12 @@
             "video",
             "video.1"
         ],
+        "keyword": [
+            "web",
+            "developement",
+            "react",
+            "front-end"
+        ],
         "createdAt": "",
         "title": "the Complete React Development Bootcamp",
         "instructor": "Angela Yu",
@@ -73,6 +91,12 @@
         "Content": [
             "video",
             "video.1"
+        ],
+        "keyword": [
+            "web",
+            "developement",
+            "vue",
+            "front-end"
         ],
         "createdAt": "",
         "title": "the Complete Vue Development Bootcamp",
@@ -96,6 +120,12 @@
             "video",
             "video.1"
         ],
+        "keyword": [
+            "web",
+            "developement",
+            "ionic",
+            "front-end"
+        ],
         "createdAt": "",
         "title": "the Complete Ionic Development Bootcamp",
         "instructor": "Angela Yu",
@@ -117,6 +147,11 @@
         "Content": [
             "video",
             "video.1"
+        ],
+        "keyword": [
+            "application",
+            "java",
+            "front-end"
         ],
         "createdAt": "",
         "title": "the Complete Java Development Bootcamp",
@@ -140,6 +175,11 @@
             "video",
             "video.1"
         ],
+        "keyword": [
+            "web",
+            "developement",
+            "python"
+        ],
         "createdAt": "",
         "title": "the Complete Python Development Bootcamp",
         "instructor": "Angela Yu",
@@ -161,6 +201,12 @@
         "Content": [
             "video",
             "video.1"
+        ],
+        "keyword": [
+            "application",
+            "developement",
+            "django",
+            "back-end"
         ],
         "createdAt": "",
         "title": "the Complete Django Development Bootcamp",
@@ -184,6 +230,12 @@
             "video",
             "video.1"
         ],
+        "keyword": [
+            "application",
+            "developement",
+            "R",
+            "data"
+        ],
         "createdAt": "",
         "title": "the Complete R Development Bootcamp",
         "instructor": "Angela Yu",
@@ -205,6 +257,12 @@
         "Content": [
             "video",
             "video.1"
+        ],
+        "keyword": [
+            "application",
+            "developement",
+            "Ruby",
+            "back-end-end"
         ],
         "createdAt": "",
         "title": "the Complete Ruby Development Bootcamp",

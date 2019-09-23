@@ -1,9 +1,12 @@
 const Course = require('./../models/courseModel')
-
+const APIFeatures = require('./../utils/apiFeatures')
 
 exports.getAllCourses = async (req, res) => {
     try {
-        const courses = await Course.find();
+
+        const features = new APIFeatures(Course.find(), req.query).filter().sort().sort().limitFields().paginate();
+
+        const courses = await features.query;
 
         res.status(200).json({
             status: 'success',
@@ -15,7 +18,7 @@ exports.getAllCourses = async (req, res) => {
         });
     } catch (err) {
         res.status(404).json({
-            status: 'fail',
+            status: 'failure',
             message: err
         })
     }

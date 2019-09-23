@@ -17,12 +17,14 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: [true, 'A course must have a cover image']
     },
+    keyword: [String],
     QA: [String],
     Announcements: [String],
     Content: [String],
     createdAt: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
+        select: false
     }
 });
 
