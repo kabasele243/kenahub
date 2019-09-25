@@ -1,9 +1,9 @@
 const Course = require('./../models/courseModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
 
-
-exports.getAllCourses = catchAsync(async (req, res) => {
+exports.getAllCourses = catchAsync(async (req, res, next) => {
 
     const features = new APIFeatures(Course.find(), req.query).filter().sort().sort().limitFields().paginate();
 
@@ -22,8 +22,13 @@ exports.getAllCourses = catchAsync(async (req, res) => {
 });
 
 
-exports.getCourse = catchAsync(async (req, res) => {
+exports.getCourse = catchAsync(async (req, res, next) => {
+
     const course = await Course.findById(req.params.id);
+
+    if (!course) {
+        return next(new AppError('No course found with that ID', 404))
+    }
 
     res.status(200).json({
         status: 'success',
@@ -47,9 +52,14 @@ exports.createCourse = catchAsync(async (req, res, next) => {
     });
 });
 
-exports.updateCourse = catchAsync(async (req, res) => {
+exports.updateCourse = catchAsync(async (req, res, next) => {
 
-    const course = await Course.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+    const course = await Course.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+
+    if (!course) {
+        return next(new AppError('No course found with that ID', 404))
+    }
+
     res.status(200).json({
         status: 'success',
         data: {
@@ -58,9 +68,14 @@ exports.updateCourse = catchAsync(async (req, res) => {
     })
 });
 
-exports.deleteCourse = catchAsync(async (req, res) => {
+exports.deleteCourse = catchAsync(async (req, res, next) => {
 
-    await Course.findByIdAndDelete(req.params.id);
+    const course = await Course.findByIdAndDelete(req.params.id);
+
+    if (!course) {
+        return next(new AppError('No course found with that ID', 404))
+    }
+
     res.status(204).json({
         status: 'success',
         data: null
@@ -69,7 +84,7 @@ exports.deleteCourse = catchAsync(async (req, res) => {
 })
 
 
-exports.getCourseStats = catchAsync(async (req, res) => {
+exports.getCourseStats = catchAsync(async (req, res, next) => {
 
     const stats = await Course.aggregate([
         {
