@@ -96,3 +96,32 @@ exports.deleteCourse = async (req, res) => {
         })
     }
 }
+
+
+exports.getCourseStats = async (req, res) => {
+    try {
+        const stats = await Course.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    overview: {
+                        student: { $gte: 30 }
+                    }
+                }
+            }
+        ]);
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                stats
+            }
+        });
+
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+        })
+    }
+}

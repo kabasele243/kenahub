@@ -9,6 +9,7 @@ router
     .route('/')
     .get(courseController.getAllCourses)
     .post(courseController.createCourse);
+router.route('/course-stats').get(courseController.getCourseStats)
 
 router
     .route('/:id')
