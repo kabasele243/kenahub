@@ -29,7 +29,8 @@ const courseSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
         select: false
-    }
+    },
+    passwordChangedAt: Date
 });
 
 
@@ -38,7 +39,9 @@ const courseSchema = new mongoose.Schema({
 courseSchema.pre('save', function (next) {
     this.slug = slugify(this.title, { lower: true });
     next();
-})
+});
+
+
 
 const Course = mongoose.model('Course', courseSchema);
 
